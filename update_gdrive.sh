@@ -1,0 +1,1 @@
+rclone sync ./ 03MIAR:03MIAR --exclude-from ./.rcloneignore -P
