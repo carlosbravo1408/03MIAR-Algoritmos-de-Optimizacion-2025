@@ -6,7 +6,7 @@ Periodo académico 2025 - 2026
 
 ## Actividades Guiadas:
 
-### [Actividad Guiada 1 (AG1)](./AG1/Algoritmos AG1(Divide y vencerás,Voraz,Backtracking).ipynb):
+### [Actividad Guiada 1 (AG1)](./AG1/Algoritmos%20AG1(Divide%20y%20vencerás,Voraz,Backtracking).ipynb):
 
 * Torres de Hanoi (Divide y Vencerás / Variante Iterativa)
 * Cambio de monedas (Técnica Voraz)
