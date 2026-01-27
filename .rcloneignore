@@ -5,3 +5,7 @@ __pycache__/**
 venv/**
 .ipynb_checkpoints/**
 *.log
+Origen/**
+SecuenciaDeFibonacci.ipynb
+*/Algoritmos AG1(Divide y vencerás,Voraz,Backtracking).ipynb
+AG1/**
