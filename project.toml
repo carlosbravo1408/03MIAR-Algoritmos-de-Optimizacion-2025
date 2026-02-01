@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "miar03"
+version = "0.0.1"
+description = "Librería de algoritmos MIAR03"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "numpy",
+    "matplotlib"
+]
+
+[tool.setuptools]
+packages = ["MIAR03"]
