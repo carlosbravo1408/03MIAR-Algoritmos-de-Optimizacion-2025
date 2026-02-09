@@ -3,3 +3,6 @@ pandas
 matplotlib
 jupyterlab
 sympy
+networkx
+scikit-learn
+tsplib95
