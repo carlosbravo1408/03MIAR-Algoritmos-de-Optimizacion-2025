@@ -21,7 +21,15 @@ Periodo académico 2025 - 2026
 * [Ejercicio Extra] Estimar límite computacional aceptable para el problema de Asignacion de tareas.
 * [Ejercicio Extra] Obtener el descenso de gradiente de la función $f(x)=sin(1/2 * x^2 - 1/4 * y^2 + 3) * cos(2*x + 1 - e^y)$
 
-### Actividad Guiada 3 (AG3): TODO
+### [Actividad Guiada 3 (AG3)](./AG3/CarlosJavierBravo_Algoritmos_AG3.ipynb): 
+
+* Problema del Agente Viajero (TSP)
+* Búsqueda Aleatoria
+* Búsqueda Local
+* [Ejercicio Extra] Búsqueda local con Entornos Variables (VNS) 
+* Simulated Annealing (Recocido Simulado)
+* [Ejercicio Extra] Mejor búsqueda de Vecindad (y mejor criterio de Cooling 
+  Schedule)
 
 ### Actividad Guiada 4 (AG4): TODO
 
