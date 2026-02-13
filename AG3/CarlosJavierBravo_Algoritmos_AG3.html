@@ -7737,7 +7737,13 @@ Euclidiano</p>
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">tsp_problem</span><span class="p">:</span> <span class="n">tsplib95</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Problem</span> <span class="o">=</span> <span class="n">tsplib95</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
 
-<span class="n">nodes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">NodeType</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">tsp_problem</span><span class="o">.</span><span class="n">get_nodes</span><span class="p">())</span>
+<span class="c1"># Lo siguiente NO es una buena práctica de programacion y hay gente que</span>
+<span class="c1"># considera sucia, pero permite optimizar algo más el código. Se inyecta la</span>
+<span class="c1"># lista de nodos en el objeto tsp_problem, con ello se evita crear una nueva</span>
+<span class="c1"># lista cada vez que se invoca a `get_nodes()`</span>
+<span class="n">tsp_problem</span><span class="o">.</span><span class="n">cached_nodes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">tsp_problem</span><span class="o">.</span><span class="n">get_nodes</span><span class="p">())</span>
+
+<span class="n">nodes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">NodeType</span><span class="p">]</span> <span class="o">=</span> <span class="n">tsp_problem</span><span class="o">.</span><span class="n">cached_nodes</span>
 <span class="n">edges</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">EdgeType</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">tsp_problem</span><span class="o">.</span><span class="n">get_edges</span><span class="p">())</span>
 </pre></div>
 </div>
@@ -7917,7 +7923,7 @@ volviéndola a tirar. Este es un método <em>ingenuo</em>.</p>
 <span class="sd">    :param n: el número de iteraciones</span>
 <span class="sd">    :return:</span>
 <span class="sd">    """</span>
-    <span class="n">nodos</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">problem</span><span class="o">.</span><span class="n">get_nodes</span><span class="p">())</span>
+    <span class="n">nodos</span> <span class="o">=</span> <span class="n">problem</span><span class="o">.</span><span class="n">cached_nodes</span>
     <span class="n">mejor_solucion</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="c1"># Inicializamos con un valor alto</span>
     <span class="n">mejor_distancia</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">'inf'</span><span class="p">)</span>
@@ -8685,7 +8691,7 @@ de encontrar el óptimo global en instancias complejas del TSP.</p>
 <span class="sd">    :return:</span>
 <span class="sd">    """</span>
 
-    <span class="n">solucion_referencia</span> <span class="o">=</span> <span class="n">crear_solucion</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">problem</span><span class="o">.</span><span class="n">get_nodes</span><span class="p">()))</span>
+    <span class="n">solucion_referencia</span> <span class="o">=</span> <span class="n">crear_solucion</span><span class="p">(</span><span class="n">problem</span><span class="o">.</span><span class="n">cached_nodes</span><span class="p">)</span>
     <span class="n">distancia_referencia</span> <span class="o">=</span> <span class="n">distancia_total</span><span class="p">(</span><span class="n">solucion_referencia</span><span class="p">,</span> <span class="n">problem</span><span class="p">)</span>
 
     <span class="n">mejor_solucion</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">solucion_referencia</span><span class="p">)</span>  <span class="c1">#x* del pseudocodigo</span>
@@ -8763,16 +8769,6 @@ con una distancia total de 1273
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>Representación en un grafo a partir de la matriz de distancias (Optimización de posiciones usando escalado multidimensional (MDS)</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>Multidimensional scaling problem(MDS):   <a href="https://en.wikipedia.org/wiki/Multidimensional_scaling">https://en.wikipedia.org/wiki/Multidimensional_scaling</a></p>
 </div>
 </div>
@@ -8879,7 +8875,7 @@ con una distancia total de 1273
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>/home/carlos/03MIAR-Algoritmos-de-Optimizacion-2025/venv/lib/python3.10/site-packages/sklearn/manifold/_mds.py:677: FutureWarning: The default value of `n_init` will change from 4 to 1 in 1.9.
+<pre>/home/**/03MIAR-Algoritmos-de-Optimizacion-2025/venv/lib/python3.10/site-packages/sklearn/manifold/_mds.py:677: FutureWarning: The default value of `n_init` will change from 4 to 1 in 1.9.
   warnings.warn(
 </pre>
 </div>
@@ -8917,7 +8913,7 @@ con una distancia total de 1273
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>/home/carlos/03MIAR-Algoritmos-de-Optimizacion-2025/venv/lib/python3.10/site-packages/sklearn/manifold/_mds.py:677: FutureWarning: The default value of `n_init` will change from 4 to 1 in 1.9.
+<pre>/home/**/03MIAR-Algoritmos-de-Optimizacion-2025/venv/lib/python3.10/site-packages/sklearn/manifold/_mds.py:677: FutureWarning: The default value of `n_init` will change from 4 to 1 in 1.9.
   warnings.warn(
 </pre>
 </div>
@@ -8955,7 +8951,7 @@ con una distancia total de 1273
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>/home/carlos/03MIAR-Algoritmos-de-Optimizacion-2025/venv/lib/python3.10/site-packages/sklearn/manifold/_mds.py:677: FutureWarning: The default value of `n_init` will change from 4 to 1 in 1.9.
+<pre>/home/**/03MIAR-Algoritmos-de-Optimizacion-2025/venv/lib/python3.10/site-packages/sklearn/manifold/_mds.py:677: FutureWarning: The default value of `n_init` will change from 4 to 1 in 1.9.
   warnings.warn(
 </pre>
 </div>
@@ -8991,6 +8987,7 @@ con una distancia total de 1273
 <span class="n">download_tsp_file</span><span class="p">(</span><span class="s2">"https://raw.githubusercontent.com/mastqe/tsplib/refs/heads/master/att48.tsp"</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
 
 <span class="n">att48_problem</span> <span class="o">=</span> <span class="n">tsplib95</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+<span class="n">att48_problem</span><span class="o">.</span><span class="n">cached_nodes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">att48_problem</span><span class="o">.</span><span class="n">get_nodes</span><span class="p">())</span>
 
 <span class="n">solucion_inicial_att48</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">busqueda_aleatoria</span><span class="p">(</span><span class="n">att48_problem</span><span class="p">,</span> <span class="mi">50000</span><span class="p">)</span>
 <span class="n">solucion_inicial_att48</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">busqueda_local</span><span class="p">(</span><span class="n">solucion_inicial_att48</span><span class="p">,</span> <span class="n">att48_problem</span><span class="p">,</span> <span class="n">variant</span><span class="o">=</span><span class="s2">"2-opt"</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -9078,6 +9075,7 @@ con una distancia total de 10970
 <span class="n">download_tsp_file</span><span class="p">(</span><span class="s2">"https://raw.githubusercontent.com/mastqe/tsplib/refs/heads/master/eil51.tsp"</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
 
 <span class="n">eil51_problem</span> <span class="o">=</span> <span class="n">tsplib95</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+<span class="n">eil51_problem</span><span class="o">.</span><span class="n">cached_nodes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">eil51_problem</span><span class="o">.</span><span class="n">get_nodes</span><span class="p">())</span>
 
 <span class="n">solucion_inicial_eil51</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">busqueda_aleatoria</span><span class="p">(</span><span class="n">eil51_problem</span><span class="p">,</span> <span class="mi">50000</span><span class="p">)</span>
 <span class="n">solucion_inicial_att48</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">busqueda_local</span><span class="p">(</span><span class="n">solucion_inicial_eil51</span><span class="p">,</span> <span class="n">eil51_problem</span><span class="p">,</span> <span class="n">variant</span><span class="o">=</span><span class="s2">"2-opt"</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -9172,8 +9170,6 @@ con una distancia total de 429
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h1 id="Nota-sobre-el-uso-de-herramientas-de-IA-generativa">Nota sobre el uso de herramientas de IA generativa<a class="anchor-link" href="#Nota-sobre-el-uso-de-herramientas-de-IA-generativa">¶</a></h1><p>En la elaboración de este notebook se emplearon herramientas de inteligencia artificial generativa de manera puntual y como apoyo conceptual, con los siguientes fines específicos:</p>
 <ul>
-<li>Orientación bibliográfica, mediante la sugerencia de artículos académicos y
-material de investigación relevantes, utilizados para contextualizar y explorar estrategias aplicables a algoritmos de búsqueda local con vecindades variables (Variable Neighborhood Search, VNS).</li>
 <li>Propuesta conceptual de esquemas de generación de vecindades para el algoritmo de Simulated Annealing, incluyendo configuraciones topológicamente más suaves, como la combinación probabilística de operadores (por ejemplo, 80% 2-opt y 20% insertion), empleadas como punto de partida para el diseño experimental.</li>
 <li>Sugerencia de variantes para el ajuste fino (fine-tuning) del cooling schedule en el algoritmo de Simulated Annealing, utilizadas como guía para la exploración de parámetros y su posterior validación empírica.</li>
 </ul>
@@ -9189,7 +9185,7 @@ material de investigación relevantes, utilizados para contextualizar y explorar
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h1 id="Bibliograf%C3%ADa">Bibliografía<a class="anchor-link" href="#Bibliograf%C3%ADa">¶</a></h1><ul>
-<li>[1<a id="ref1"></a>] N. Mladenović y P. Hansen, "Variable neighborhood search, " Computers &amp; Operations Research, vol. 24, no. 11, pp. 1097-1100, Nov. 1997.</li>
+<li>[1<a id="ref1"></a>] N. Mladenović, P. Hansen, J. Moreno "Variable neighborhood search, " Computers &amp; Operations Research, vol. 24, no. 11, pp. 1097-1100, Nov. 1997.</li>
 <li>[2<a id="ref2"></a>] M. Lundy y A. Mees, "Convergence of an annealing algorithm," Mathematical Programming, vol. 34, no. 1, pp. 111–124, 1986.</li>
 <li>[3] Google, "Gemini," (versión Feb. 2026), [Modelo de Lenguaje Grande].</li>
 </ul>
