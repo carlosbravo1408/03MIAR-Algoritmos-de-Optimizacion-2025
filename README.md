@@ -37,13 +37,13 @@ Periodo académico 2025 - 2026
 
 ### Post sobre el ejercicio de elementos repetidos en dos listas:
 
-En [este notebook](./EjercicioSesion1.ipynb) presento algunas formas de resolver este problema con complejidades temporales que van desde $O(N)$, $O(N \log N)$ y $O(N^2)$. 
+En [este notebook](./AportesForo/EjercicioSesion1.ipynb) presento algunas formas de resolver este problema con complejidades temporales que van desde $O(N)$, $O(N \log N)$ y $O(N^2)$. 
 
 Propongo un análisis tanto temporal, como espacial, recalcando sus ventajas y desventajas respectivamente.
 
 ### Post sobre el $N$-ésimo término de la Serie de Fibonacci
 
-En [este notebook](./SecuenciaDeFibonacci.ipynb) presento 7 formas de encontrar el $N$-ésimo término de la serie de Fibonacci, haciendo uso de distintas estrategias tanto algorítmicas como matemáticas, en cada forma o variante presento su respectiva ventaja, desventaja o limitación técnica.
+En [este notebook](./AportesForo/SecuenciaDeFibonacci.ipynb) presento 7 formas de encontrar el $N$-ésimo término de la serie de Fibonacci, haciendo uso de distintas estrategias tanto algorítmicas como matemáticas, en cada forma o variante presento su respectiva ventaja, desventaja o limitación técnica.
 
 Teóricamente, se pueden lograr complejidades temporales de $O(\log N)$, pero 
 existen ciertos matices y variables ocultas.
