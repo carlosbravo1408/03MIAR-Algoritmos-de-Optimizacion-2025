@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio de Investigación - [Tu Nombre]</title>
+    <style>
+        /* CSS Integrado para máximo rendimiento */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f7f6;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 40px 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        h1 { color: #2c3e50; margin-bottom: 10px; font-size: 2.5em; }
+        .subtitle { color: #7f8c8d; font-size: 1.2em; font-weight: 300; }
+
+        .project-card {
+            background: #ffffff;
+            padding: 30px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border-left: 5px solid #2980b9;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+        .project-title { margin-top: 0; color: #2c3e50; font-size: 1.5em; }
+
+        .tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 15px; }
+        .tag {
+            background: #ecf0f1;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            color: #34495e;
+            font-weight: 600;
+        }
+
+        /* Nuevos estilos para las viñetas */
+        .project-bullets {
+            margin-top: 10px;
+            margin-bottom: 25px;
+            padding-left: 20px;
+            color: #555;
+        }
+        .project-bullets li {
+            margin-bottom: 8px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2980b9;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 24px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .btn:hover { background: #1f618d; }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            color: #95a5a6;
+            font-size: 0.9em;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Carlos Javier Bravo Intriago</h1>
+        <h2>Portafolio de la Asignatura Algoritmos de Optimización</h2>
+        <div class="subtitle">VIU - MIAR03 - 2025-2026</div>
+        <p>Bienvenido a mi portafolio. Aquí documento mis actividades guiadas,
+            aportes al foro, y el trabajo práctico final.</p>
+    </header>
+
+    <main>
+        <h1>Actividades Guiadas</h1>
+        <article class="project-card">
+            <h2 class="project-title">Actividad Guiada 1</h2>
+            <div class="tags">
+                <span class="tag">Divide y Vencerás</span>
+                <span class="tag">Técnica Voráz</span>
+                <span class="tag">Backtracking</span>
+                <span class="tag">Big O Notation</span>
+            </div>
+            <p class="project-desc">
+                Implementación y análisis de complejidad computacional (Big
+                O) de algoritmos clásicos. Este módulo explora la resolución
+                de problemas fundamentales mediante diferentes estrategias de
+                diseño, evaluando la eficiencia espacial y temporal de cada
+                enfoque.
+            </p>
+            <ul class="project-bullets">
+            <li>Torres de Hanoi (Divide y Vencerás / Variante Iterativa)</li>
+            <li>Cambio de monedas (Técnica Voraz)</li>
+            <li>N-Reinas (Backtracking)</li>
+            <li><b>[Ejercicio Extra]</b> Par de puntos más cercanos en 1-Dimensión, 2-Dimensiones y 3-Dimensiones (Divide y Vencerás)</li>
+            </ul>
+            <a href="./AG1/Algoritmos%20AG1(Divide%20y%20vencerás%2CVoraz%2CBacktracking).html" class="btn" target="_blank">Ver AG1</a>
+        </article>
+
+        <article class="project-card">
+            <h2 class="project-title">Actividad Guiada 2</h2>
+            <div class="tags">
+                <span class="tag">Programación Dinámica</span>
+                <span class="tag">Ramificación y Poda</span>
+                <span class="tag">Descenso del Gradiente</span>
+            </div>
+            <p class="project-desc">
+                Desarrollo y análisis de estrategias de optimización exacta y
+                continua. Este módulo aborda la resolución de problemas
+                complejos mediante la exploración inteligente de espacios de
+                estados (evaluando empíricamente los límites de tratabilidad
+                computacional) y transiciona hacia la minimización de
+                funciones matemáticas continúas utilizando cálculo numérico
+                guiado por derivadas.
+            </p>
+            <ul class="project-bullets">
+            <li>Viaje por el río (Programación Dinámica / Variante con Dijkstra)</li>
+            <li>Problema de Asignación de tareas (Ramificación y Poda / Variante con estrategia Best First Search)</li>
+            <li><b>[Ejercicio Extra]</b> Estimar límite computacional aceptable para el problema de Asignación de tareas.</li>
+            <li>Descenso del Gradiente</li>
+            <li><b>[Ejercicio Extra]</b> Obtener el descenso de gradiente de función. (Aproximación con dos variantes de derivación para determinar el gradiente)</li>
+            </ul>
+            <a href="./AG2/Algoritmos_AG2.html" class="btn" target="_blank">Ver AG2</a>
+        </article>
+
+        <article class="project-card">
+            <h2 class="project-title">Actividad Guiada 3</h2>
+            <div class="tags">
+                <span class="tag">TSP</span>
+                <span class="tag">Búsqueda Local</span>
+                <span class="tag">VNS (Búsqueda de Entornos Variables)</span>
+                <span class="tag">SA (Recocido Simulado)</span>
+            </div>
+            <p class="project-desc">
+                Estudio e implementación de algoritmos aproximados para la
+                resolución de problemas de optimización combinatoria
+                NP-duros. Este módulo se centra en el diseño de
+                metaheurísticas basadas en trayectorias (VNS, SA) y en
+                inteligencia de enjambres (Colonia de Hormigas) para escapar
+                sistemáticamente de óptimos locales, calibrando
+                probabilísticamente la exploración del espacio de búsqueda y
+                los esquemas de enfriamiento.
+            </p>
+            <ul class="project-bullets">
+            <li>Problema del Agente Viajero (TSP).</li>
+            <li>Búsqueda Aleatoria.</li>
+            <li>Búsqueda Local.</li>
+            <li><b>[Ejercicio Extra]</b> Búsqueda local con Entornos Variables (VNS).</li>
+            <li>Simulated Annealing (Recocido Simulado).</li>
+            <li><b>[Ejercicio Extra]</b> Mejor búsqueda de Vecindad (y mejor criterio de Cooling Schedule).</li>
+            <li><b>[Ejercicio Extra]</b> (Ant Colony Optimization) Colonia de Hormigas.</li>
+            </ul>
+            <a href="./AG3/CarlosJavierBravo_Algoritmos_AG3.html" class="btn"
+               target="_blank">Ver AG3 - VNS & SA</a>
+            <a href="./AG3/CarlosJavierBravo_Algoritmos_AG3_Colonia_de_Hormigas.html" class="btn"
+               target="_blank">Ver AG3 - ACO</a>
+        </article>
+
+        <h1>Trabajo Práctico</h1>
+        <article class="project-card">
+            <h2 class="project-title">Sesión de Doblaje</h2>
+            <div class="tags">
+                <span class="tag">Estrategia Heurística</span>
+                <span class="tag">VNS</span>
+                <span class="tag">SA</span>
+            </div>
+            <p class="project-desc">
+                Modelado y resolución de un problema logístico complejo
+                centrado en la minimización de costos salariales ("tarifa
+                plana") bajo restricciones estrictas de asignación diaria. El
+                estudio emplea una validación cruzada entre dos
+                metaheurísticas de trayectoria (Búsqueda de Entornos
+                Variables y Recocido Simulado) para garantizar la robustez
+                del óptimo encontrado.
+            </p>
+            <ul class="project-bullets">
+                <li>Diseño de un modelo de datos unidimensional optimizado para la evaluación ultrarrápida de vecindades y control natural de restricciones.</li>
+                <li>Implementación concurrente de Recocido Simulado (enfriamiento de Lundy-Mees) y VNS.</li>
+                <li>Validación empírica del óptimo global al demostrar la convergencia de ambas estrategias estocásticas hacia el mismo límite de costo (27 unidades salariales).</li>
+                <li>Análisis de la topología degenerada del problema: descubrimiento, filtrado de isomorfismos y almacenamiento de más de 170 planes de rodaje estructuralmente únicos e igualmente óptimos.</li>
+            </ul>
+            <a href="./TrabajoPractico/CarlosJavierBravo_Trabajo_Práctico_Algoritmos.html" class="btn" target="_blank">Ver Trabajo Práctico</a>
+        </article>
+
+        <h1>Aportes al Foro</h1>
+        <article class="project-card">
+            <h2 class="project-title">Encontrar elementos en Común entre dos listas</h2>
+            <div class="tags">
+                <span class="tag">Big O Notation</span>
+                <span class="tag">HashSet</span>
+                <span class="tag">Ordenamiento y Binary Search</span>
+            </div>
+            <p class="project-desc">
+                Este aporte surgió a partir de una interrogante presentada en
+                clases al yo sugerir que se podría realizar esta tarea con
+                una complejidad temporal lineal. Por lo que me propuse a
+                explorar tanto las variantes propuestas en clases por otros
+                compañeros, mi propuesta en clases, y variantes extras con
+                base en una segunda interrogante sobre si no existía `hash` en
+                el lenguaje de programacion a trabajar (caso hipotético).
+            </p>
+            <ul class="project-bullets">
+                <li>Variante 1: Uso de HashSet O(N)</li>
+                <li>Variante 2: List Comprehension O(N²)</li>
+                <li>Variante 3: Ciclo for anidado O(N²)</li>
+                <li>Variante 4: Un Hibrido entre Set Comprehension y List Comprehension O(N)</li>
+                <li>Variante 5: Ordenamiento y Búsqueda Binaria O(N log M)</li>
+            </ul>
+            <a href="./AportesForo/EjercicioSesion1.html" class="btn" target="_blank">Ver Aporte 1</a>
+        </article>
+
+        <article class="project-card">
+            <h2 class="project-title">El problema de la sucesión de Fibonacci</h2>
+            <div class="tags">
+                <span class="tag">Big O Notation</span>
+                <span class="tag">Recursividad</span>
+                <span class="tag">Divide y Vencerás</span>
+                <span class="tag">Ramificación y Poda</span>
+                <span class="tag">Potenciación Matricial</span>
+            </div>
+            <p class="project-desc">
+                Este aporte se dio en consecuencia a una propuesta del
+                profesor de si era posible mejorar la implementación
+                recursiva del algoritmo para encontrar el k-ésimo término de
+                la serie de fibonacci.
+            </p>
+            <p>
+                En este caso propongo un estudio exhaustivo sobre la
+                optimización extrema para el cálculo del k-ésimo término de
+                Fibonacci. Este análisis evalúa empíricamente cinco
+                paradigmas algorítmicos, escalando la eficiencia
+                computacional hasta lograr calcular el 5000º término.
+            </p>
+            <ul class="project-bullets">
+                <li>Variante 1: Recursividad, Divide y Vencerás O(2ⁿ)</li>
+                <li>Variante 2: Recursividad, Divide y Vencerás y Memoization (Memoization local vs Memoization Global) O(N)</li>
+                <li>Variante 3: Método Iterativo O(N)</li>
+                <li>Variante 4: Exponencial Matricial (naive-numpy vs
+                    Exponentiation Binaria O(log M) sin considerar costos
+                    ocultos)</li>
+                <li>Variante 5: Fast Doubling O(log N) (sin considerar costos
+                    ocultos)</li>
+            </ul>
+            <a href="./AportesForo/SecuenciaDeFibonacci.html" class="btn" target="_blank">Ver Aporte 2</a>
+        </article>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 [Carlos Javier Bravo Intriago]. Generado para GitHub Pages.</p>
+    </footer>
+
+</body>
+</html>
