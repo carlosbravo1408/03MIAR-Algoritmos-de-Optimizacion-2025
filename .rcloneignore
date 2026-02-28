@@ -6,8 +6,8 @@ venv/**
 .ipynb_checkpoints/**
 *.log
 Origen/**
-SecuenciaDeFibonacci.ipynb
-EjercicioSesion1.ipynb
+AportesForo/SecuenciaDeFibonacci.ipynb
+AportesForo/EjercicioSesion1.ipynb
 */Algoritmos AG1(Divide y vencerás,Voraz,Backtracking).*
 */Algoritmos_AG2.*
 AG1/**
