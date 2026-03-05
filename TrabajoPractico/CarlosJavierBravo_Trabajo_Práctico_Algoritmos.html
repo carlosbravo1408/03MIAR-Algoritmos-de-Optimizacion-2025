@@ -8202,7 +8202,7 @@ crear nuevos días aleatoriamente</li>
             <span class="n">solucion_vecina</span><span class="p">[</span><span class="n">toma_b</span><span class="p">]</span> <span class="o">=</span> <span class="n">dia_a</span>
             <span class="k">return</span> <span class="n">solucion_vecina</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">fusionar_dias</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">mover_varias_tomas</span><span class="p">(</span>
         <span class="n">solucion</span><span class="p">:</span> <span class="n">SolutionType</span><span class="p">,</span>
         <span class="n">intensidad</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">max_tomas</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">MAX_TOMAS_POR_DIA</span><span class="p">,</span>
@@ -8240,7 +8240,7 @@ crear nuevos días aleatoriamente</li>
         <span class="k">return</span> <span class="n">mover_una_toma</span><span class="p">(</span><span class="n">solucion</span><span class="p">,</span> <span class="n">max_tomas</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">elif</span> <span class="n">intensidad</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">swap</span><span class="p">(</span><span class="n">solucion</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">fusionar_dias</span><span class="p">(</span><span class="n">solucion</span><span class="p">,</span> <span class="n">intensidad</span><span class="p">,</span> <span class="n">max_tomas</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">mover_varias_tomas</span><span class="p">(</span><span class="n">solucion</span><span class="p">,</span> <span class="n">intensidad</span><span class="p">,</span> <span class="n">max_tomas</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8478,12 +8478,32 @@ line-height: 1.2;">Fig 2. Representación del algoritmo SA.
 <h4 id="Generaci%C3%B3n-de-nueva-vecindad:">Generación de nueva vecindad:<a class="anchor-link" href="#Generaci%C3%B3n-de-nueva-vecindad:">¶</a></h4><p>En cada iteración se genera un único vecino alterando la solución actual
 mediante dos operadores equiprobables (50% de probabilidad cada uno):</p>
 <ul>
-<li>Swap: selecciona aleatoriamente dos tomas asignadas a días distintos y las
-intercambia. Este movimiento no viola la restricción de máximo 6 tomas por día.</li>
-<li>Move: Extrae una toma aleatoria y la reubica en un día distinto diferente,
+<li><p>Swap: selecciona aleatoriamente dos tomas asignadas a días distintos y las
+intercambia. Este movimiento no viola la restricción de máximo 6 tomas por día.</p>
+<p>Este movimiento tiene un impacto menor, y en parte se debe a que la
+cantidad total de tomas asignadas a cada día permanece inalteradas. Si el
+día A tenia 10 tomas, y el día B tenía 5, tras esta operacion, siguen
+tanto el día A como el B teniendo 10 y 5 días respectivamente.</p>
+</li>
+<li><p>Move: Extrae una toma aleatoria y la reubica en un día distinto diferente,
 procurando no violar la restricción antes mencionada, y permitiendo agregar
-un día extra de grabación.</li>
+un día extra de grabación.</p>
+<p>Su impacto se lo puede catalogar destructivo y asimétrico, dado que
+altera directamente la cantidad de tomas de los días involucrados (el día
+de origen pierde una toma, el día destino gana una)</p>
+</li>
 </ul>
+<blockquote>
+<p>Cabe acotar que la elección del 50% de probabilidad para cada movimiento no
+obedece ningún criterio matemático de fondo, fue una estimación ingenua que
+ha dado resultados satisfactorios. Pese a que formalmente se debe definir
+cada movimiento (destructivo o de afinamiento) en relación con la topología del
+problema, es complejo determinar la topología de este, por lo que en
+esencia se procedía a ejecutar multiples pruebas con el fin de ajustar o
+calibrar los porcentajes de probabilidad de cada movimiento; sin embargo,
+como ya se sugirió previamente, con la equiprobabilidad se dieron resultados
+satisfactorios.</p>
+</blockquote>
 <h4 id="Esquema-de-Enfriamiento:">Esquema de Enfriamiento:<a class="anchor-link" href="#Esquema-de-Enfriamiento:">¶</a></h4><p>Para el control de la temperatura ($T$), se ha descartado el enfriamiento
 geométrico tradicional, haciendo uso de la ecuación de Lundy-Mees [<a href="#ref3">3</a>]
 $\left( T_{k+1}=\frac{T_k}{1+ \beta \cdot T_K} \right)$. Esta fórmula provoca
@@ -8760,12 +8780,24 @@ complejas del TSP.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Experimento:">Experimento:<a class="anchor-link" href="#Experimento:">¶</a></h3><p>Después de ejecutar 100 veces el algoritmo de búsqueda local con entornos
-variables, se puede inducir que el mínimo al que tiende a converger entre un
-80~85% de las veces es a 27 unidades salariales.</p>
-<p>A su vez, al ejecutar 100 veces el algoritmo de SA, también tiende a
-converger a 27 unidades salariales. Sin embargo, la distribución de frecuencia
-de este valor es de un 98~99%</p>
+<h3 id="Experimento:">Experimento:<a class="anchor-link" href="#Experimento:">¶</a></h3><p>Para evaluar la consistencia entre los dos algoritmos, se diseñó un
+experimento que consiste en 100 ejecuciones independientes de cada algoritmo
+metaheuristico. El objetivo es medir la frecuencia con la que cada técnica
+logra converger hacia el mejor coste para el problema, que tiende a ser 27
+unidades salariales.</p>
+<ul>
+<li><p>Búsqueda con Entornos Variables (VNS):
+Tras evaluar 100 ejecuciones, el algoritmo demostró una tasa del 80%~85% en
+converger hacia el minimo de 27 unidades salariales. El margen de error
+indica que existe aún instancias que se sigue estancando en algún minimo
+local al que no se logra escapar.</p>
+</li>
+<li><p>Recocido Simulado (SA):
+Sometido a las mismas condiciones experimentales, el algoritmo SA logro
+alcanzar el mismo minimo óptimo de 27 unidades salariales, registrando una
+tasa de convergencia de un 98%~99%.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -10093,12 +10125,26 @@ tienen por coste 27 unidades salariales.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Nota-sobre-el-uso-de-herramientas-de-IA-generativa">Nota sobre el uso de herramientas de IA generativa<a class="anchor-link" href="#Nota-sobre-el-uso-de-herramientas-de-IA-generativa">¶</a></h1><p>En la elaboración de este notebook se emplearon herramientas de inteligencia artificial generativa de manera puntual y como apoyo en la presentación de resultados, específicamente para:</p>
+<h1 id="Nota-sobre-el-uso-de-herramientas-de-IA-generativa">Nota sobre el uso de herramientas de IA generativa<a class="anchor-link" href="#Nota-sobre-el-uso-de-herramientas-de-IA-generativa">¶</a></h1><p>En la elaboración de este notebook se emplearon herramientas de inteligencia
+artificial generativa de manera puntual y como apoyo en la presentación de
+resultados, específicamente para:</p>
 <ul>
-<li>Asistencia en la generación de tablas de resultados en formato legible, con el objetivo de mejorar la claridad y facilitar la interpretación de los resultados finales por parte del usuario.</li>
-<li>Apoyo en la generación de código para la visualización gráfica de los distintos experimentos realizados con los algoritmos Variable Neighborhood Search (VNS) y Simulated Annealing (SA).</li>
+<li>Generación de una animación base utilizando <code>Manim</code>, la cual fue utilizada
+como referencia inicial para el desarrollo de la animación <code>Fig 1</code>, que
+ilustra el modelo o la estructura de datos elegida para representar el
+espacio de soluciones.</li>
+<li>Asistencia en la generación de tablas de resultados en formato legible, con
+el objetivo de mejorar la claridad y facilitar la interpretación de los
+resultados finales por parte del usuario.</li>
+<li>Apoyo en la generación de código para la visualización gráfica de los
+distintos experimentos realizados con los algoritmos Variable Neighborhood
+Search (VNS) y Simulated Annealing (SA).</li>
 </ul>
-<p>El código final utilizado, incluyendo las modificaciones, la integración y la adaptación a los objetivos del experimento, es de autoría propia o se basa en material proporcionado en clase y en recursos disponibles públicamente, los cuales han sido reinterpretados, modificados y desarrollados para los fines de este trabajo.</p>
+<p>El código final utilizado, incluyendo las modificaciones, la integración y la
+adaptación a los objetivos del experimento, es de autoría propia o se basa
+en material proporcionado en clase y en recursos disponibles públicamente,
+los cuales han sido reinterpretados, modificados y desarrollados para los
+fines de este trabajo.</p>
 </div>
 </div>
 </div>
